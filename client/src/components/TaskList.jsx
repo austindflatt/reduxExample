@@ -7,8 +7,10 @@ import {
 } from "../redux/todoSlice";
 import { TextInput, Table, ScrollArea, Badge, NativeSelect, Button } from '@mantine/core';
 import Stats from './Stats/Stats';
+import formatDistance from 'date-fns/formatDistance'
 
 const TaskList = () => {
+  const [editable, setEditable] = useState(false);
   const [search, setSearch] = useState('');
   const [priority, setPriority] = useState('');
   const [completed, setCompleted] = useState('');
@@ -66,6 +68,7 @@ const TaskList = () => {
         <tr>
           <th>Title</th>
           <th>Description</th>
+          <th>Added</th>
           <th>Priority</th>
           <th>Status</th>
           <th>Task Actions</th>
@@ -92,10 +95,16 @@ const TaskList = () => {
             }
           })
           .map((todo) => {
+            const dateStr = todo.createdAt;
+            const str = formatDistance(
+              new Date(dateStr),
+              new Date()
+            );
             return (
             <tr key={todo._id}>
               <td>{todo.title}</td>
               <td>{todo.description}</td>
+              <td>{str}</td>
               <td>
                 <Badge 
                 color={
@@ -112,7 +121,7 @@ const TaskList = () => {
               </td>
               <td>{todo.completed ? <>Complete</> : <>Incomplete</>}</td>
               <td>
-                <Button type="Submit" variant="light" size="sm" style={{ marginRight: '10px' }}>Update</Button>
+                <Button type="Submit" variant="light" size="sm" style={{ marginRight: '10px' }} onClick={() => setEditable(!editable)}>{editable ? <>Save</> : <>Update</>}</Button>
                 <Button type="Submit" variant="light" color="red" size="sm" onClick={() => handleDelete(todo._id)}>Delete</Button>
               </td>
             </tr>

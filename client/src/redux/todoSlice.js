@@ -24,6 +24,22 @@ export const fetchCreateTodo = createAsyncThunk(
   }
 );
 
+export const fetchUpdateTodo = createAsyncThunk(
+  "todo/updateTodo",
+  async (updateBody, id) => {
+    console.log(updateBody);
+    const response = await fetch(`/tasks/update/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(updateBody),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const postResponse = response.json();
+    return postResponse;
+  }
+);
+
 export const deleteTodo = createAsyncThunk("todo/deleteTodo", async (id) => {
   console.log('delete')
   const response = await fetch(

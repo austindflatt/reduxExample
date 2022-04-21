@@ -129,7 +129,7 @@ const TaskList = () => {
             <tr key={todo._id}>
               <td>{todo.title}</td>
               <td>{todo.description}</td>
-              <td>{str}</td>
+              <td>{str} ago</td>
               <td>
                 <Badge 
                 color={

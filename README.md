@@ -4,11 +4,12 @@
 * Navigation bar
 * Home Page
 * Display a list of tasks
-* Display task statistics
+
+## Display task statistics
 * Number of tasks Completed, Incompleted, Total
 * Number of tasks in different priorities
 * Completed task percentage
-## Sort tasks by 
+## Sort tasks by
 * completed
 * priority
 ## Filter tasks by 

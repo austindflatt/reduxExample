@@ -7,6 +7,7 @@ import {
 } from "../redux/todoSlice";
 import { TextInput, Table, ScrollArea, Badge, NativeSelect, Button } from '@mantine/core';
 import Stats from './Stats/Stats';
+import EditTask from './EditTask';
 import formatDistance from 'date-fns/formatDistance'
 
 const TaskList = () => {
@@ -27,6 +28,10 @@ const TaskList = () => {
   
   const handleDelete = (id) => {
     dispatch(deleteTodo(id));
+  }
+
+  const handleEdit = (id) => {
+    setEditable(!editable)
   }
   
   return (
@@ -61,6 +66,12 @@ const TaskList = () => {
   variant="filled"
   style={{ marginBottom: '10px' }}
   />
+  
+  {
+    editable ?
+    <EditTask />
+    : null
+  }
 
   <ScrollArea>
     <Table sx={{ minWidth: 800 }} verticalSpacing="sm" style={{ justifyContent: 'center' }}>
@@ -121,7 +132,7 @@ const TaskList = () => {
               </td>
               <td>{todo.completed ? <>Complete</> : <>Incomplete</>}</td>
               <td>
-                <Button type="Submit" variant="light" size="sm" style={{ marginRight: '10px' }} onClick={() => setEditable(!editable)}>{editable ? <>Save</> : <>Update</>}</Button>
+                <Button type="Submit" variant="light" size="sm" style={{ marginRight: '10px' }} onClick={() => handleEdit(todo._id)}>{editable ? <>Save</> : <>Update</>}</Button>
                 <Button type="Submit" variant="light" color="red" size="sm" onClick={() => handleDelete(todo._id)}>Delete</Button>
               </td>
             </tr>

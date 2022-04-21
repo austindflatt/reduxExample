@@ -5,10 +5,10 @@ import {
 	fetchTodosList,
   deleteTodo,
 } from "../redux/todoSlice";
-import { TextInput, Table, ScrollArea, Badge, NativeSelect, Button } from '@mantine/core';
+import { TextInput, Table, ScrollArea, Title, Badge, NativeSelect, Button, SimpleGrid } from '@mantine/core';
 import Stats from './Stats/Stats';
 import EditTask from './EditTask';
-import formatDistance from 'date-fns/formatDistance'
+import formatDistance from 'date-fns/formatDistance';
 
 const TaskList = () => {
   const [editable, setEditable] = useState(false);
@@ -44,6 +44,16 @@ const TaskList = () => {
   rightSectionWidth={42}
   style={{ marginTop: '20px', marginBottom: '20px' }}
   />
+  
+  <Title order={3} style={{ marginBottom: '10px' }}>Filter Tasks</Title>
+
+  <SimpleGrid
+  cols={2}
+  breakpoints={[
+    { maxWidth: 'md', cols: 2 },
+    { maxWidth: 'xs', cols: 1 },
+  ]}
+  >
 
   <NativeSelect
   data={['Critical', 'High', 'Medium', 'Low']}
@@ -66,6 +76,10 @@ const TaskList = () => {
   variant="filled"
   style={{ marginBottom: '10px' }}
   />
+
+  </SimpleGrid>
+  
+  <Title order={3} style={{ marginBottom: '10px' }}>Sort Tasks</Title>
   
   {
     editable ?

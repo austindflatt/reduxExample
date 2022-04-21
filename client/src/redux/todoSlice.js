@@ -20,9 +20,20 @@ export const fetchCreateTodo = createAsyncThunk(
       },
     });
     const postResponse = response.json();
-  return postResponse;
-	}
+    return postResponse;
+  }
 );
+
+export const deleteTodo = createAsyncThunk("todo/deleteTodo", async (id) => {
+  console.log('delete')
+  const response = await fetch(
+    `/tasks/delete/${id}`, {
+      method: 'DELETE',
+    }
+  );
+  const deletedTodo = response.json();
+  return deletedTodo;
+});
 
 export const selectTodoList = (state) => state.todo.todosList;
 export const selectTodoCreated = (state) => state.todo.todoCreated;

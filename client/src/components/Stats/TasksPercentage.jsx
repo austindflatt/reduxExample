@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, Paper, Group } from '@mantine/core';
 
-const TasksPercentage = () => {
+const TasksPercentage = (props) => {
 
   return (
   <>
@@ -11,7 +11,7 @@ const TasksPercentage = () => {
         <Text color="dimmed" size="xs" transform="uppercase" weight={700}>
           Completed Percentage
         </Text>
-        <Text weight={700} size="xl">0%</Text>
+        <Text weight={700} size="xl">{props.tasksPercentage}%</Text>
       </div>
     </Group>
   </Paper>

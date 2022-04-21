@@ -3,8 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
 	selectTodoList,
 	fetchTodosList,
-	selectTodoCreated,
-	selectPriority,
+  deleteTodo,
 } from "../redux/todoSlice";
 import { TextInput, Table, ScrollArea, Badge, Button } from '@mantine/core';
 import Stats from './Stats/Stats';
@@ -16,11 +15,15 @@ const TaskList = () => {
   //dispatch calls for the reducer functions
   const todosList = useSelector(selectTodoList);
   //useSelector takes in the state
-  const priority = useSelector(selectPriority);
+  // const priority = useSelector(selectPriority);
   
   useEffect(() => {
     dispatch(fetchTodosList());
   }, [dispatch]);
+  
+  const handleDelete = (id) => {
+    dispatch(deleteTodo(id));
+  }
   
   return (
   <>
@@ -66,8 +69,8 @@ const TaskList = () => {
               </td>
               <td>{todo.completed ? <>Complete</> : <>Incomplete</>}</td>
               <td>
-                <Button type="Submit" variant="light" color="orange" size="sm" style={{ marginRight: '10px' }}>Update</Button>
-                <Button type="Submit" variant="light" color="red" size="sm" >Delete</Button>
+                <Button type="Submit" variant="light" size="sm" style={{ marginRight: '10px' }}>Update</Button>
+                <Button type="Submit" variant="light" color="red" size="sm" onClick={() => handleDelete(todo._id)}>Delete</Button>
               </td>
             </tr>
             )

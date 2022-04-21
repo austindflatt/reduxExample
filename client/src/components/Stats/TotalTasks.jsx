@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, Paper, Group } from '@mantine/core';
 
-const TotalTasks = () => {
+const TotalTasks = (props) => {
 
   return (
   <>
@@ -11,7 +11,7 @@ const TotalTasks = () => {
         <Text color="dimmed" size="xs" transform="uppercase" weight={700}>
           Total Tasks
         </Text>
-        <Text weight={700} size="xl">0</Text>
+        <Text weight={700} size="xl">{props.totalTasks}</Text>
       </div>
     </Group>
   </Paper>

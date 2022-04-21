@@ -5,11 +5,13 @@ import {
 	fetchTodosList,
   deleteTodo,
 } from "../redux/todoSlice";
-import { TextInput, Table, ScrollArea, Badge, Button } from '@mantine/core';
+import { TextInput, Table, ScrollArea, Badge, NativeSelect, Button } from '@mantine/core';
 import Stats from './Stats/Stats';
 
 const TaskList = () => {
   const [search, setSearch] = useState('');
+  const [priority, setPriority] = useState('');
+  const [completed, setCompleted] = useState('');
 
   const dispatch = useDispatch();
   //dispatch calls for the reducer functions
@@ -35,6 +37,29 @@ const TaskList = () => {
   rightSectionWidth={42}
   style={{ marginTop: '20px', marginBottom: '20px' }}
   />
+
+  <NativeSelect
+  data={['Critical', 'High', 'Medium', 'Low']}
+  onChange={(e) => setPriority(e.target.value)}
+  value={priority}
+  placeholder="Select Priority"
+  label="Select a priority level"
+  description="Filter tasks by priority"
+  variant="filled"
+  style={{ marginBottom: '10px' }}
+  />
+
+  <NativeSelect
+  data={['true', 'false']}
+  onChange={(e) => setCompleted(e.target.value)}
+  value={completed}
+  placeholder="Select Status"
+  label="Select status of task"
+  description="Filter tasks by complete(true) or incomplete(false)"
+  variant="filled"
+  style={{ marginBottom: '10px' }}
+  />
+
   <ScrollArea>
     <Table sx={{ minWidth: 800 }} verticalSpacing="sm" style={{ justifyContent: 'center' }}>
       <thead>
@@ -48,7 +73,25 @@ const TaskList = () => {
       </thead>
       <tbody>
         {
-          todosList.map((todo) => {
+          todosList
+          .filter((todo) => {
+            if(priority === '' && completed === '' && search === ''){
+              return true
+            }
+            if(priority !== '' && completed !== '' && search !== '' && todo.priority.includes(priority) && todo.completed.includes(completed) && todo.title.toLowerCase().includes(search.toLowerCase())){
+              return true
+            }
+            if(priority !== '' && todo.priority.includes(priority)){
+              return true
+            }
+            if(completed !== '' && todo.completed.toString() === completed){
+              return true
+            }
+            if(search !== '' && todo.title.toLowerCase().includes(search.toLowerCase())){
+              return true
+            }
+          })
+          .map((todo) => {
             return (
             <tr key={todo._id}>
               <td>{todo.title}</td>

@@ -119,6 +119,8 @@ const TaskList = () => {
               return true
             }
           })
+          // .sort((todo) => {
+          // })
           .map((todo) => {
             const dateStr = todo.createdAt;
             const str = formatDistance(

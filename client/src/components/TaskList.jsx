@@ -79,7 +79,7 @@ const TaskList = () => {
 
   </SimpleGrid>
   
-  <Title order={3} style={{ marginBottom: '10px' }}>Sort Tasks</Title>
+  {/* <Title order={3} style={{ marginBottom: '10px' }}>Sort Tasks</Title> */}
   
   {
     editable ?
